@@ -10,6 +10,7 @@ import {changeGameDifficulty, changePlayerSymbol, makeMove, startGame, resetGame
 
 
 
+
 function mapStartMenuStateToProps(state){
   return {symbolChoice: state.gameSettings.playerSymbol,
           difficultyChoice: state.gameSettings.difficulty
@@ -43,6 +44,7 @@ function mapGameBoardDispatchToProps(dispatch){
 const GameBoardConnected = connect(mapGameBoardStateToProps, mapGameBoardDispatchToProps)(GameBoard);
 
 
+
 function mapGameOverStateToProps(state){
   return {winner: state.gameStatus.winner,
     playerSymbol: state.gameSettings.playerSymbol
@@ -67,7 +69,7 @@ class App extends Component {
         return (
         <div>
          <GameOverConnected />
-         <GameBoardConnected />       
+         <GameBoardConnected />
         </div>
       );
       default:

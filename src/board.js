@@ -150,7 +150,6 @@ export function isThereAWinner(board, lastMoveRow, lastMoveCol){
 //Board Symbol Number Number -> Board
 //Returns a board with the symbol at the given coordinates in the board
 export function putSymbolAtRowCol(board, symbol, row, col){
-  ;
   const newBoard = board.map(function(rowList, i){
     if(row===i){
       return [...rowList.slice(0, col), symbol, ...rowList.slice(col+1)];
@@ -158,6 +157,17 @@ export function putSymbolAtRowCol(board, symbol, row, col){
     return rowList.slice(0);
   }
   })
-  console.log(newBoard)
   return newBoard;
+}
+
+export function getFreeSpots(board){
+  const freeSpots = [];
+  for(let row = 0; row < board.length; row++){
+    for(let col = 0; col < board[row].length; col++){
+      if(isRowColEmpty(board, row, col)){
+        freeSpots.push([row, col]);
+      }
+    }
+  }
+  return freeSpots;
 }

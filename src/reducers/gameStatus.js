@@ -10,7 +10,7 @@ function switchSymbol(symbol){
   }
 }
 
-function tryToPutSymbolAtRowCol(previousState, symbol, row, col){
+function tryToPutSymbolAtRowCol(previousState, row, col){
   const board = previousState.board;
   const currentSymbol = previousState.currentPlayerSymbol;
   if(isRowColEmpty(board, row, col)){
@@ -48,7 +48,7 @@ function gameStatusReducer(previousState = {}, action){
         case MAKE_MOVE:
 
             return {...previousState,
-                    ...tryToPutSymbolAtRowCol(previousState, "X", action.row, action.col)}
+                    ...tryToPutSymbolAtRowCol(previousState, action.row, action.col)}
         default:
             return previousState;
     }
