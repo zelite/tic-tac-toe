@@ -19,7 +19,6 @@ class GameBoard extends Component{
       this.props.goBackToStartMenu();
     }
     handleClickCell = (i, j) =>{
-      console.log("This is happening!")
       console.log("You clicked on: ", [i, j]);
       this.props.makeMove(i, j);
     }

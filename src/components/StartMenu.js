@@ -67,7 +67,7 @@ class StartMenu extends Component{
                     handleInputChange={this.handleInputChange} />
             <button onClick={this.handleClickStart}>Start Game!</button>
 
-            <div><em>First Prototype. The computer does not play yet. You need to play for it.</em></div>
+            <div><em>First Prototype. The computer only plays randomly. There is no hard mode yet.</em></div>
         </div>
         );
     }

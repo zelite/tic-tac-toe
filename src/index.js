@@ -12,9 +12,9 @@ store.subscribe(function(){
   const currentPlayerSymbol = currentGameState.gameStatus.currentPlayerSymbol;
   const playerSymbol = currentGameState.gameSettings.playerSymbol;
   const currentBoard = currentGameState.gameStatus.board;
-  const turnNumber = currentGameState.gameStatus.turnNumber
+  const currentView = currentGameState.gameStatus.currentView
   //debugger;
-  if(currentPlayerSymbol !== playerSymbol && turnNumber < 9){
+  if(currentPlayerSymbol !== playerSymbol && currentView === "in-game"){
     const aiMove = easyPlayerNextMove(currentBoard);
     console.log(aiMove);
     store.dispatch(makeMove(aiMove[0], aiMove[1]));
