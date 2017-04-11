@@ -32,12 +32,12 @@ const S3 = "O";
 const B1 = [["E", "E", "E"],
             ["E", "E", "E"],
             ["E", "E", "E"]];
-const B2 = [["E", "E", "E"],
-            ["E", "E", "E"],
-            ["E", "E", "E"]];
-const B3 = [["E", "E", "E"],
-            ["E", "E", "E"],
-            ["E", "E", "E"]];
+const B2 = [["X", "O", "X"],
+            ["X", "O", "O"],
+            ["O", "X", "X"]];
+const B3 = [["X", "E", "O"],
+            ["X", "O", "E"],
+              ["X", "O", "X"]];
 
 //template
 // function fnForBoard(board){

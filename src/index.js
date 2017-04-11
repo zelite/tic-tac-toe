@@ -4,19 +4,29 @@ import store from './store.js'
 import {Provider} from 'react-redux'
 import App from './App';
 import './index.css';
-import {easyPlayerNextMove} from "./aiPlayer.js";
+import {easyPlayerNextMove, hardPlayer} from "./aiPlayer.js";
 import {makeMove} from "./actions/actionCreators.js";
+
+
+let newhardPlayer;
 
 store.subscribe(function(){
   const currentGameState = store.getState();
   const currentPlayerSymbol = currentGameState.gameStatus.currentPlayerSymbol;
   const playerSymbol = currentGameState.gameSettings.playerSymbol;
   const currentBoard = currentGameState.gameStatus.board;
-  const currentView = currentGameState.gameStatus.currentView
-  //debugger;
+  const currentView = currentGameState.gameStatus.currentView;
+  
+  if(currentView === "in-game" && currentGameState.gameStatus.turnNumber === 0 && currentGameState.gameSettings.difficulty === "hard"){
+    newhardPlayer = new hardPlayer();
+  }
   if(currentPlayerSymbol !== playerSymbol && currentView === "in-game"){
-    const aiMove = easyPlayerNextMove(currentBoard);
-    console.log(aiMove);
+    let aiMove;
+    if(currentGameState.gameSettings.difficulty === "easy"){
+      aiMove = easyPlayerNextMove(currentBoard);
+    }else{
+      aiMove = newhardPlayer.NextMove(currentGameState.gameStatus, playerSymbol);
+    }
     store.dispatch(makeMove(aiMove[0], aiMove[1]));
   }
 })
