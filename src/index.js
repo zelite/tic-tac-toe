@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import store from './store.js'
-import {Provider} from 'react-redux'
+import store from './store.js';
+import {Provider} from 'react-redux';
 import App from './App';
 import './index.css';
 import {easyPlayerNextMove, hardPlayer} from "./aiPlayer.js";
-import {makeMove} from "./actions/actionCreators.js";
+import {makeMove, startGame} from "./actions/actionCreators.js";
 
 
 let newhardPlayer;
@@ -17,8 +17,13 @@ store.subscribe(function(){
   const currentBoard = currentGameState.gameStatus.board;
   const currentView = currentGameState.gameStatus.currentView;
   
-  if(currentView === "in-game" && currentGameState.gameStatus.turnNumber === 0 && currentGameState.gameSettings.difficulty === "hard"){
-    newhardPlayer = new hardPlayer();
+  if(currentView === "loading"){
+    if(currentGameState.gameSettings.difficulty === "hard"){
+      setTimeout(function() {newhardPlayer = new hardPlayer(); store.dispatch(startGame())}, 10);
+    }else{
+      store.dispatch(startGame());
+    }
+    return;
   }
   if(currentPlayerSymbol !== playerSymbol && currentView === "in-game"){
     let aiMove;
@@ -29,7 +34,7 @@ store.subscribe(function(){
     }
     store.dispatch(makeMove(aiMove[0], aiMove[1]));
   }
-})
+});
 
 
 

@@ -5,55 +5,53 @@ import StartMenu from './components/StartMenu.js';
 import GameBoard from "./components/GameBoard.js";
 import GameOver from "./components/GameOver.js";
 import './App.css';
-import {changeGameDifficulty, changePlayerSymbol, makeMove, startGame, resetGame} from "./actions/actionCreators.js";
+import {changeGameDifficulty, changePlayerSymbol, makeMove, loadGame, resetGame} from "./actions/actionCreators.js";
 
 
-
-
-
-function mapStartMenuStateToProps(state){
-  return {symbolChoice: state.gameSettings.playerSymbol,
-          difficultyChoice: state.gameSettings.difficulty
+function mapStartMenuStateToProps(state) {
+  return {
+    symbolChoice: state.gameSettings.playerSymbol,
+    difficultyChoice: state.gameSettings.difficulty
   };
 }
 
-function mapStartMenuDispatchToProps(dispatch){
+function mapStartMenuDispatchToProps(dispatch) {
   return {
     changeDifficulty: (newDifficulty) => dispatch(changeGameDifficulty(newDifficulty)),
-    changeSymbol:  (newSymbol) => dispatch(changePlayerSymbol(newSymbol)),
-    startGame: () => dispatch(startGame())
+    changeSymbol: (newSymbol) => dispatch(changePlayerSymbol(newSymbol)),
+    loadGame: () => dispatch(loadGame())
   };
 }
 
 const StartMenuConnected = connect(mapStartMenuStateToProps, mapStartMenuDispatchToProps)(StartMenu);
 
-function mapGameBoardStateToProps(state){
+function mapGameBoardStateToProps(state) {
   return {
     boardState: state.gameStatus.board
-  }
+  };
 }
 
-function mapGameBoardDispatchToProps(dispatch){
+function mapGameBoardDispatchToProps(dispatch) {
   return {
     goBackToStartMenu: () => dispatch(resetGame()),
     makeMove: (row, col) => dispatch(makeMove(row, col))
-
-  }
+  };
 }
 
 const GameBoardConnected = connect(mapGameBoardStateToProps, mapGameBoardDispatchToProps)(GameBoard);
 
 
 
-function mapGameOverStateToProps(state){
-  return {winner: state.gameStatus.winner,
+function mapGameOverStateToProps(state) {
+  return {
+    winner: state.gameStatus.winner,
     playerSymbol: state.gameSettings.playerSymbol
   };
 }
 
-function mapGameOverDispatchToProps(dispatch){
+function mapGameOverDispatchToProps(dispatch) {
   return {
-    resetGame: (newDifficulty) => dispatch(resetGame(newDifficulty)),
+    resetGame: () => dispatch(resetGame()),
   };
 }
 
@@ -61,17 +59,19 @@ function mapGameOverDispatchToProps(dispatch){
 const GameOverConnected = connect(mapGameOverStateToProps, mapGameOverDispatchToProps)(GameOver);
 
 class App extends Component {
-  chooseView(currentView){
-    switch(currentView){
+  chooseView(currentView) {
+    switch (currentView) {
+      case "loading":
+        return <div>Loading...</div>;
       case "in-game":
         return <GameBoardConnected />;
       case "game-over":
         return (
-        <div>
-         <GameOverConnected />
-         <GameBoardConnected />
-        </div>
-      );
+          <div>
+            <GameOverConnected />
+            <GameBoardConnected />
+          </div>
+        );
       default:
         return <StartMenuConnected />;
     }
@@ -79,7 +79,7 @@ class App extends Component {
   render() {
     const currentView = this.chooseView(this.props.currentView);
     return (
-        <div className="App">
+      <div className="App">
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Tic Tac Toe</h2>
@@ -90,5 +90,9 @@ class App extends Component {
   }
 }
 
-const AppConnected = connect(function(state){return {currentView: state.gameStatus.currentView}}, null)(App);
+const AppConnected = connect(function(state) {
+  return {
+    currentView: state.gameStatus.currentView
+  };
+}, null)(App);
 export default AppConnected;

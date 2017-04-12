@@ -1,52 +1,44 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
-
-
-//Radio
-class SelectOne extends Component {
-    render() {
-        const isFirstChoiceSelected = this.props.optionSelected === this.props.firstChoice;
-        return (
-            <div>
-                <h3>{this.props.title}</h3>
-                <label> {this.props.firstChoice}
-                    <input name={this.props.name}
-                        value={this.props.firstChoice} type="radio"
-                        checked={isFirstChoiceSelected} onChange={this.props.handleInputChange}/>
-                </label>
-                <label> {this.props.secondChoice}
-                <input name={this.props.name}
-                    value={this.props.secondChoice} type="radio"
-                    checked={!isFirstChoiceSelected} onChange={this.props.handleInputChange}/>
-                </label>
-            </div>
-        );
-    }
+function SelectOne(props) {
+    const isFirstChoiceSelected = props.optionSelected === props.firstChoice;
+    return (
+        <div>
+            <h3>{props.title}</h3>
+            <label> {props.firstChoice}
+                <input name={props.name}
+                    value={props.firstChoice} type="radio"
+                    checked={isFirstChoiceSelected} onChange={props.handleInputChange}/>
+            </label>
+            <label> {props.secondChoice}
+            <input name={props.name}
+                value={props.secondChoice} type="radio"
+                checked={!isFirstChoiceSelected} onChange={props.handleInputChange}/>
+            </label>
+        </div>
+    );
 }
 
-class SelectSymbol extends Component {
-    render() {
-        return (
-            <SelectOne firstChoice="X" secondChoice="O" name="symbolChoice"
-            optionSelected={this.props.optionSelected}
-            handleInputChange={this.props.handleInputChange}
-            title="Choose Symbol"/>
-        );
-    }
+function SelectSymbol(props) {
+    return (
+        <SelectOne firstChoice="X" secondChoice="O" name="symbolChoice"
+        optionSelected={props.optionSelected}
+        handleInputChange={props.handleInputChange}
+        title="Choose Symbol"/>
+    );
 }
 
-class SelectDifficulty extends Component {
-    render() {
-        return (
-            <SelectOne firstChoice="easy" secondChoice="hard" name="difficultyChoice"
-            optionSelected={this.props.optionSelected}
-            handleInputChange={this.props.handleInputChange}
-            title="Choose Difficulty"/>
-        );
-    }
+function SelectDifficulty(props) {
+    return (
+        <SelectOne firstChoice="easy" secondChoice="hard" name="difficultyChoice"
+        optionSelected={props.optionSelected}
+        handleInputChange={props.handleInputChange}
+        title="Choose Difficulty"/>
+    );
 }
 
-class StartMenu extends Component{
+class StartMenu extends Component {
     handleInputChange = (event) => {
         const whatIsChanging = event.target.name;
         const dispatchFunctions = {
@@ -55,12 +47,12 @@ class StartMenu extends Component{
         };
         dispatchFunctions[whatIsChanging](event.target.value);
     }
-    handleClickStart = ()=>{
-        this.props.startGame();
+    handleClickStart = () => {
+        this.props.loadGame();
     }
-    render(){
+    render() {
         return (
-        <div className="start-menu">
+            <div className="start-menu">
             <SelectSymbol optionSelected={this.props.symbolChoice}
                         handleInputChange={this.handleInputChange} />
             <SelectDifficulty optionSelected={this.props.difficultyChoice}
@@ -73,11 +65,12 @@ class StartMenu extends Component{
     }
 }
 
-StartMenu.PropTypes = {changeDifficulty: React.PropTypes.func.isRequired,
-                       changeSymbol: React.PropTypes.func.isRequired,
-                       startGame: React.PropTypes.func.isRequired,
-                       symbolChoice: React.PropTypes.oneOf(["X", "O"]).isRequired,
-                       difficultyChoice: React.PropTypes.oneOf(["easy", "hard"]).isRequired
+StartMenu.PropTypes = {
+    changeDifficulty: PropTypes.func.isRequired,
+    changeSymbol: PropTypes.func.isRequired,
+    startGame: PropTypes.func.isRequired,
+    symbolChoice: PropTypes.oneOf(["X", "O"]).isRequired,
+    difficultyChoice: PropTypes.oneOf(["easy", "hard"]).isRequired
 };
 
 

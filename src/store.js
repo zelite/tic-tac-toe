@@ -1,13 +1,10 @@
 import {createStore, combineReducers} from 'redux';
 import gameSettingsReducer from './reducers/gameSettings.js';
-import gameStatusReducer from './reducers/gameStatus.js'
-import * as board from "./board.js"
+import gameStatusReducer from './reducers/gameStatus.js';
 
 
 const rootReducer = combineReducers({gameSettings: gameSettingsReducer,
-                                    gameStatus: gameStatusReducer})
-
-export const placeholder = board.getSymbolAtRowCol;
+                   gameStatus: gameStatusReducer});
 
 export const defaultGameStatus = {
       currentPlayerSymbol: "X",
@@ -18,7 +15,7 @@ export const defaultGameStatus = {
               ["E", "E", "E"],
               ["E", "E", "E"]],
       lastMove: []
-}
+};
 
 const store = createStore(rootReducer, {
     gameSettings:{
@@ -27,5 +24,6 @@ const store = createStore(rootReducer, {
     },
     gameStatus: defaultGameStatus
 });
+
 
 export default store;

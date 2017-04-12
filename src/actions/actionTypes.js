@@ -4,3 +4,4 @@ export const START_GAME = "START_GAME";
 export const MAIN_MENU = "MAIN_MENU";
 export const GAME_OVER = "GAME_OVER";
 export const MAKE_MOVE = "MAKE_MOVE";
+export const LOADING_GAME = "LOADING_GAME";

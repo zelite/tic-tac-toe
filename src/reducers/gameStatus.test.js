@@ -1,5 +1,7 @@
 import gameStatusReducer from "./gameStatus.js";
+import {defaultGameStatus} from "../store.js";
 import * as actionCreators from "../actions/actionCreators.js";
+
 
 it("starts the game", ()=>{
    const initialState = {currentView: "start-menu", winner:'draw'};
@@ -11,7 +13,7 @@ it("starts the game", ()=>{
 
 it("resets the game", ()=>{
    const initialState = {currentView: "in-game", winner: 'draw'};
-   const expectedFinalState = {currentView: "start-menu", winner:'draw'};
+   const expectedFinalState = defaultGameStatus;
    const action = actionCreators.resetGame();
    const returnedFinalState = gameStatusReducer(initialState, action) ;
    expect(returnedFinalState).toEqual(expectedFinalState);

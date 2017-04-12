@@ -1,32 +1,35 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
-class gameOver extends Component{
-    getFinalMessage(winner, playerSymbol){
-      if(winner === "draw"){
-        return "It is a draw.";
-      }else if(winner === playerSymbol){
-          return "Congratulations, you won!";
-      }else{
-        return "Sorry, the computer won.";
-      }
+class gameOver extends Component {
+    getFinalMessage(winner, playerSymbol) {
+        if (winner === "draw") {
+            return "It is a draw.";
+        }
+        else if (winner === playerSymbol) {
+            return "Congratulations, you won!";
+        }
+        else {
+            return "Sorry, the computer won.";
+        }
     }
-    clickReset = ()=>{
+    clickReset = () => {
         this.props.resetGame();
     }
-    render(){
+    render() {
         const final_message = this.getFinalMessage(this.props.winner, this.props.playerSymbol);
-        return(
+        return (
             <div>
                 <h3>Game Over</h3>
                 <p>{final_message}</p>
             </div>
-            );
+        );
     }
 }
 
 gameOver.PropTypes = {
-    resetGame: React.PropTypes.func.isRequired,
-    winner: React.PropTypes.oneOf(["X", "O", "draw"]).isRequired
+    resetGame: PropTypes.func.isRequired,
+    winner: PropTypes.oneOf(["X", "O", "draw"]).isRequired
 };
 
 export default gameOver;
