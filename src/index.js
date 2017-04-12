@@ -16,10 +16,10 @@ store.subscribe(function(){
   const playerSymbol = currentGameState.gameSettings.playerSymbol;
   const currentBoard = currentGameState.gameStatus.board;
   const currentView = currentGameState.gameStatus.currentView;
-  
+
   if(currentView === "loading"){
     if(currentGameState.gameSettings.difficulty === "hard"){
-      setTimeout(function() {newhardPlayer = new hardPlayer(); store.dispatch(startGame())}, 10);
+      setTimeout(function() {newhardPlayer = new hardPlayer(); store.dispatch(startGame())}, 100);
     }else{
       store.dispatch(startGame());
     }
