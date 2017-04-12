@@ -16,8 +16,7 @@ class GameBoard extends Component {
   handleClickExitButton = () => {
     this.props.goBackToStartMenu();
   }
-  handleClickCell = (i, j) => {
-    console.log("You clicked on: ", [i, j]);
+  handleClickCell = (i, j) => {    
     this.props.makeMove(i, j);
   }
   buildBoard() {
