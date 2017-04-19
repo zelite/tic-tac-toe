@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import store from './store.js';
 import {Provider} from 'react-redux';
 import App from './App';
-import './index.css';
+import 'mini.css/dist/mini-default.min.css';
+import './index.css'
 import {easyPlayerNextMove, hardPlayer} from "./aiPlayer.js";
 import {makeMove, startGame} from "./actions/actionCreators.js";
 

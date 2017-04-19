@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import logo from './logo.svg';
 import StartMenu from './components/StartMenu.js';
 import GameBoard from "./components/GameBoard.js";
 import GameOver from "./components/GameOver.js";
-import './App.css';
 import {changeGameDifficulty, changePlayerSymbol, makeMove, loadGame, resetGame} from "./actions/actionCreators.js";
 
 
@@ -62,7 +60,11 @@ class App extends Component {
   chooseView(currentView) {
     switch (currentView) {
       case "loading":
-        return <div>Loading...</div>;
+        return (
+          <div className="loading-screen">
+            <div className="spinner-donut large"></div>
+            <h2>Loading...</h2>
+          </div>);
       case "in-game":
         return <GameBoardConnected />;
       case "game-over":
@@ -81,8 +83,7 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Tic Tac Toe</h2>
+          <h1>Tic Tac Toe</h1>
         </div>
         {currentView}
         </div>

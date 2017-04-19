@@ -5,17 +5,20 @@ function SelectOne(props) {
     const isFirstChoiceSelected = props.optionSelected === props.firstChoice;
     return (
         <div>
-            <h3>{props.title}</h3>
-            <label> {props.firstChoice}
-                <input name={props.name}
+          <h3>{props.title}</h3>
+          <div className="input-group">
+            <input tabIndex="0" name={props.name}
+                    id={props.firstChoice}
                     value={props.firstChoice} type="radio"
                     checked={isFirstChoiceSelected} onChange={props.handleInputChange}/>
-            </label>
-            <label> {props.secondChoice}
-            <input name={props.name}
+            <label htmlFor={props.firstChoice}>{props.firstChoice}</label>
+
+            <input tabIndex="0" name={props.name}
+                id={props.secondChoice}
                 value={props.secondChoice} type="radio"
                 checked={!isFirstChoiceSelected} onChange={props.handleInputChange}/>
-            </label>
+            <label htmlFor={props.secondChoice}>{props.secondChoice}</label>
+          </div>
         </div>
     );
 }
@@ -57,9 +60,7 @@ class StartMenu extends Component {
                         handleInputChange={this.handleInputChange} />
             <SelectDifficulty optionSelected={this.props.difficultyChoice}
                     handleInputChange={this.handleInputChange} />
-            <button onClick={this.handleClickStart}>Start Game!</button>
-
-            <div><em>First Prototype. See if you can beat the hard mode.</em></div>
+            <button className="large primary" onClick={this.handleClickStart}>Start Game!</button>
         </div>
         );
     }

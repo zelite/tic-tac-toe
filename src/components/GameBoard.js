@@ -3,12 +3,21 @@ import PropTypes from 'prop-types';
 
 function GameCell(props) {
   const cellStyle = {
-    fontSize: "2rem",
-    display: "inline-block"
+    width: "100px",
+    height: "100px",
+    lineHeight: "100px",
+    fontSize: "100px",
+    border: "solid black 1px",
+    display: "inline-block",
+    verticalAlign: "bottom"
   };
+  let symbol = props.symbol;
+  if(symbol === "E"){
+    symbol = ""
+  }
   return (
-    <div onClick={props.handleClickCell}
-       style={cellStyle}>{props.symbol}</div>
+    <div className="game-cell" onClick={props.handleClickCell}
+       style={cellStyle}>{symbol}</div>
   );
 }
 
@@ -16,7 +25,7 @@ class GameBoard extends Component {
   handleClickExitButton = () => {
     this.props.goBackToStartMenu();
   }
-  handleClickCell = (i, j) => {    
+  handleClickCell = (i, j) => {
     this.props.makeMove(i, j);
   }
   buildBoard() {
@@ -35,9 +44,8 @@ class GameBoard extends Component {
   render() {
     return (
       <div>
-        <h3>This is the GameBoard</h3>
-        <div>{this.buildBoard()}</div>
-        <button onClick={this.handleClickExitButton}>Exit to Start Menu</button>
+        <div className="game-board">{this.buildBoard()}</div>
+        <button className="large primary" onClick={this.handleClickExitButton}>Exit to Start Menu</button>
       </div>
     );
   }

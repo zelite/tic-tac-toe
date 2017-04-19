@@ -19,8 +19,8 @@ class gameOver extends Component {
     render() {
         const final_message = this.getFinalMessage(this.props.winner, this.props.playerSymbol);
         return (
-            <div>
-                <h3>Game Over</h3>
+            <div className="alert">
+                <h2>Game Over</h2>
                 <p>{final_message}</p>
             </div>
         );
