@@ -54,9 +54,13 @@ function gameStatusReducer(previousState = {}, action) {
         winner: action.winner
       };
     case MAKE_MOVE:
-      return {...previousState,
-        ...tryToPutSymbolAtRowCol(previousState, action.row, action.col)
-      };
+      if(previousState.currentView === "in-game"){
+        return {...previousState,
+          ...tryToPutSymbolAtRowCol(previousState, action.row, action.col)
+        };
+      }else{
+        return previousState;
+      }   
     case LOADING_GAME:
       return {
         ...previousState,
